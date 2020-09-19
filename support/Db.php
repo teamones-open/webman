@@ -13,13 +13,13 @@
  */
 namespace support;
 
-use Illuminate\Database\Capsule\Manager;
+use think\facade\Db as DbManager;
 
 /**
  * Class Db
  * @package support
  */
-class Db extends Manager
+class Db extends DbManager
 {
 
 }

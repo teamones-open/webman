@@ -254,3 +254,43 @@ function cpu_count() {
     $count = (int)$count > 0 ? (int)$count : 4;
     return $count;
 }
+
+
+
+if (!function_exists('get_format_date')) {
+    /**
+     * string格式化用户使用语言
+     * @param $time
+     * @param int $type
+     * @param bool $isGantt
+     * @return false|string
+     */
+    function get_format_date($time, $type = 0, $isGantt = false)
+    {
+        if (!empty($time) && is_numeric($time)) {
+
+            $timestamp = $time + (3600 * 8);
+
+            switch ($type) {
+                case 0:
+                    if ($isGantt) {
+                        $date = gmdate("d-m-Y", $timestamp);
+                    } else {
+                        $date = gmdate("Y-m-d", $timestamp);
+                    }
+                    break;
+                case 2:
+                    $date = gmdate("Y-m-d H:i", $timestamp);
+                    break;
+                case 1:
+                default:
+                    $date = gmdate("Y-m-d H:i:s", $timestamp);
+                    break;
+            }
+
+            return $date;
+        } else {
+            return '';
+        }
+    }
+}

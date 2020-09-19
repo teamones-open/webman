@@ -27,7 +27,11 @@
     "php": ">=7.2",
     "workerman/webman-framework": "^1.0",
     "monolog/monolog": "^2.0",
-    "vlucas/phpdotenv": ">=4.1,<6.0"
+    "vlucas/phpdotenv": "^5.1.0",
+    "topthink/think-orm": "^2.0",
+    "workerman/validation": "^3.0",
+    "illuminate/redis": "^8.2.0",
+    "symfony/translation": "^5.1"
   },
   "suggest": {
     "ext-event": "For better performance. "
@@ -41,5 +45,11 @@
     "post-autoload-dump": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
     ]
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://mirrors.aliyun.com/composer/"
+    }
   }
 }

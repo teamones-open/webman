@@ -14,7 +14,7 @@
 
 namespace support;
 
-use Illuminate\Database\Eloquent\Model as BaseModel;
+use think\Model as BaseModel;
 
 class Model extends BaseModel
 {
