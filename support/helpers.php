@@ -18,6 +18,8 @@ use support\view\Raw;
 use support\bootstrap\Translation;
 use Webman\App;
 use Webman\Config;
+use Webman\Route;
+use Workerman\Protocols\Http\Session;
 use Webman\Exception\ClassNotFoundException;
 
 define('BASE_PATH', realpath(__DIR__ . '/../'));
@@ -156,6 +158,38 @@ function config($key = null, $default = null)
     return Config::get($key, $default);
 }
 
+/**
+ * @param $name
+ * @param array $parameters
+ * @return string
+ */
+function route($name, $parameters = [])
+{
+    $route = Route::getByName($name);
+    if (!$route) {
+        return '';
+    }
+    return $route->url($parameters);
+}
+
+/**
+ * @param null $key
+ * @param null $default
+ * @return mixed
+ */
+function session($key = null, $default = null)
+{
+    $session = request()->session();
+    if (null === $key) {
+        return $session;
+    }
+    if (\is_array($key)) {
+        $session->put($key);
+        return null;
+    }
+    return $session->get($key, $default);
+}
+
 if (!function_exists('env')) {
     /**
      * @param $key
@@ -202,14 +236,15 @@ if (!function_exists('env')) {
  */
 function trans(string $id, array $parameters = [], string $domain = null, string $locale = null)
 {
-    return Translation::trans($id, $parameters, $domain, $locale);
+    $res = Translation::trans($id, $parameters, $domain, $locale);
+    return $res === '' ? $id : $res;
 }
 
 /**
  * @param null|string $locale
  * @return string
  */
-function locale(string $locale)
+function locale(string $locale = null)
 {
     if (!$locale) {
         return Translation::getLocale();

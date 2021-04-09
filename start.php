@@ -13,8 +13,12 @@ use support\Request;
 use support\bootstrap\Log;
 use support\bootstrap\Container;
 
+if (method_exists('Dotenv\Dotenv', 'createUnsafeImmutable')) {
+    Dotenv::createUnsafeImmutable(base_path())->load();
+} else {
+    Dotenv::createMutable(base_path())->load();
+}
 
-Dotenv::createMutable(base_path())->load();
 Config::load(config_path(), ['route', 'container']);
 $config = config('server');
 
@@ -25,8 +29,10 @@ if ($timezone = config('app.default_timezone')) {
 Worker::$onMasterReload = function (){
     if (function_exists('opcache_get_status')) {
         if ($status = opcache_get_status()) {
-            foreach (array_keys($status['scripts']) as $file) {
-                opcache_invalidate($file, true);
+            if (isset($status['scripts']) && $scripts = $status['scripts']) {
+                foreach (array_keys($scripts) as $file) {
+                    opcache_invalidate($file, true);
+                }
             }
         }
     }
@@ -52,10 +58,24 @@ foreach ($property_map as $property) {
 }
 
 $worker->onWorkerStart = function ($worker) {
+    set_error_handler(function ($level, $message, $file = '', $line = 0, $context = []) {
+        if (error_reporting() & $level) {
+            throw new ErrorException($message, 0, $level, $file, $line);
+        }
+    });
+    register_shutdown_function(function ($start_time) {
+        if (time() - $start_time <= 1) {
+            sleep(1);
+        }
+    }, time());
     foreach (config('autoload.files', []) as $file) {
         include_once $file;
     }
-    Dotenv::createMutable(base_path())->load();
+    if (method_exists('Dotenv\Dotenv', 'createUnsafeMutable')) {
+        Dotenv::createUnsafeMutable(base_path())->load();
+    } else {
+        Dotenv::createMutable(base_path())->load();
+    }
     Config::reload(config_path(), ['route', 'container']);
     foreach (config('bootstrap', []) as $class_name) {
         /** @var \Webman\Bootstrap $class_name */

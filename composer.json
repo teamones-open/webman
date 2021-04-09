@@ -1,6 +1,6 @@
 {
   "name": "workerman/webman",
-  "type": "library",
+  "type": "project",
   "keywords": [
     "high performance",
     "http service"
@@ -38,6 +38,9 @@
     "ext-event": "For better performance. "
   },
   "autoload": {
+    "psr-4": {
+      "app\\": "app/"
+    },
     "files": [
       "./support/helpers.php"
     ]
