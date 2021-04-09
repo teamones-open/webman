@@ -4,7 +4,7 @@
  */
 if (!function_exists('throw_http_exception')) {
     /**
-     * 抛出Strack异常
+     * 自定义抛出异常函数
      * @param $msg
      * @param int $code
      * @param array $data
