@@ -23,3 +23,5 @@ Route::any('/route-test', 'app\controller\Index@index');
 
 
 Route::any('/json', 'app\controller\Index@json');
+
+Route::any('/create', 'app\controller\Index@create');

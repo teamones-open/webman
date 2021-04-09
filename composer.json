@@ -28,11 +28,14 @@
     "workerman/webman-framework": "^1.0",
     "monolog/monolog": "^2.0",
     "vlucas/phpdotenv": "^5.1.0",
+    "php-di/php-di": "^6.3",
+    "doctrine/annotations": "^1.11",
+    "robmorgan/phinx": "^0.12.5",
+    "topthink/think-template": "^2.0",
     "topthink/think-orm": "^2.0",
     "topthink/think-validate": "^1.0.2",
     "illuminate/redis": "^8.2.0",
-    "robmorgan/phinx": "^0.12.5",
-    "topthink/think-template": "^2.0"
+    "symfony/cache": "^5.2"
   },
   "suggest": {
     "ext-event": "For better performance. "

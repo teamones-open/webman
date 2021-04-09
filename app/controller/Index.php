@@ -2,9 +2,20 @@
 namespace app\controller;
 
 use support\Request;
+use app\service\Test as TestService;
 
 class Index
 {
+
+    private $testService;
+
+
+    public function __construct(TestService $testService)
+    {
+        $this->testService = $testService;
+    }
+
+
     public function index(Request $request)
     {
         return response('hello webman');
@@ -18,6 +29,13 @@ class Index
     public function json(Request $request)
     {
         return json(['code' => 0, 'msg' => 'ok']);
+    }
+
+    public function create(Request $request)
+    {
+        $param = $request->all();
+        $res = $this->testService->create($param);
+        return json(['code' => 0, 'msg' => 'ok', 'data' => $res]);
     }
 
     public function file(Request $request)
