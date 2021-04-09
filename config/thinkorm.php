@@ -21,6 +21,8 @@ return [
             'charset'     => 'utf8',
             // 数据库表前缀
             'prefix'      => '',
+            // 是否开启SQL监听
+            'trigger_sql' => env('APP_DEBUG', false)
         ]
     ]
 ];
