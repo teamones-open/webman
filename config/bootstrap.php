@@ -15,9 +15,10 @@
 return [
     support\bootstrap\Container::class,
     support\bootstrap\Session::class,
+    support\bootstrap\Redis::class,
+    support\bootstrap\Cache::class,
     support\bootstrap\db\Heartbeat::class,
     support\bootstrap\db\Thinkphp::class,
-    support\bootstrap\Redis::class,
     support\bootstrap\Log::class,
     support\bootstrap\Translation::class,
 ];
