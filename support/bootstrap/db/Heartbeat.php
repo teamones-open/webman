@@ -31,7 +31,7 @@ class Heartbeat implements Bootstrap
     public static function start($worker)
     {
         \Workerman\Timer::add(55, function (){
-            Db::select('select 1 limit 1');
+            Db::query('select 1 limit 1');
         });
     }
 }
