@@ -31,7 +31,7 @@ class RequestValidate implements MiddlewareInterface
 
             // 验证请求数据
             if (!$validateClass->check($param)) {
-                throw_strack_exception($validateClass->getError(), -400001);
+                throw_http_exception($validateClass->getError(), -400001);
             }
         }
     }

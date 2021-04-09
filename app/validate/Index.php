@@ -12,7 +12,7 @@ namespace app\validate;
 
 use think\Validate;
 
-class Test extends Validate
+class Index extends Validate
 {
     //验证规则
     protected $rule = [];
@@ -20,7 +20,6 @@ class Test extends Validate
     // Json 验证场景定义
     public function sceneJson()
     {
-        return $this->append('data', 'require|array')
-            ->append('data.name', 'require|max:255');
+        return $this->append('data', 'require');
     }
 }

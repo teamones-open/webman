@@ -35,6 +35,10 @@ class Handler extends ExceptionHandler
 
     public function render(Request $request, Throwable $exception) : Response
     {
+        if ($exception instanceof HttpResponseException) {
+            // 抛出运行时异常
+            return new Response(200, ['Content-Type' => 'application/json'], $exception->getMessage());
+        }
         return parent::render($request, $exception);
     }
 

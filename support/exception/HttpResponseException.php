@@ -11,12 +11,15 @@
  * @link      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
+namespace support\exception;
 
-use support\view\Raw;
-use support\view\Twig;
-use support\view\Blade;
-use support\view\ThinkPHP;
+use Exception;
 
-return [
-    'handler' => ThinkPHP::class
-];
+/**
+ * Class BusinessException
+ * @package support\exception
+ */
+class HttpResponseException extends Exception
+{
+
+}

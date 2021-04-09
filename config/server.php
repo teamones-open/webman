@@ -13,11 +13,11 @@
  */
 
 return [
-    'listen'               => 'http://0.0.0.0:8787',
+    'listen'               => 'http://0.0.0.0:8080',
     'transport'            => 'tcp',
     'context'              => [],
     'name'                 => 'webman',
-    'count'                => env('SERVER_PROCESS_COUNT', cpu_count() * 2),
+    'count'                => 1,
     'user'                 => env('SERVER_PROCESS_USER', ''),
     'group'                => env('SERVER_PROCESS_GROUP', ''),
     'pid_file'             => runtime_path() . '/webman.pid',
