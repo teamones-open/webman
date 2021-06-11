@@ -25,3 +25,9 @@ Route::any('/route-test', 'app\controller\Index@index');
 Route::any('/json', 'app\controller\Index@json');
 
 Route::any('/create', 'app\controller\Index@create');
+
+Route::group('/user', function (){
+    Route::group('/v1', function (){
+        Route::any('/group_test2', 'app\controller\Index@groupTest2');
+    })->middleware(\support\middleware\MiddlewareTest::class);
+});

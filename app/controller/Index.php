@@ -1,8 +1,9 @@
 <?php
+
 namespace app\controller;
 
-use support\Request;
 use app\service\Test as TestService;
+use support\Request;
 
 class Index
 {
@@ -42,10 +43,21 @@ class Index
     {
         $file = $request->file('upload');
         if ($file && $file->isValid()) {
-            $file->move(public_path().'/files/myfile.'.$file->getUploadExtension());
+            $file->move(public_path() . '/files/myfile.' . $file->getUploadExtension());
             return json(['code' => 0, 'msg' => 'upload success']);
         }
         return json(['code' => 1, 'msg' => 'file not found']);
+    }
+
+
+    public function groupTest1(Request $request)
+    {
+        return json(['code' => 0, 'msg' => 'group test 1 ok.']);
+    }
+
+    public function groupTest2(Request $request)
+    {
+        return json(['code' => 0, 'msg' => 'group test 2 ok.']);
     }
 
 }
